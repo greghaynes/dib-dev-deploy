@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eux
+set -o pipefail
+
+source $(which ddd-env-vars)
+
+ELEMENTS_PATH=${DDD_ELEMENTS_PATH:-}\
+    PATH=$PATH:/$DDD_DIB_UTILS_REPOLOCATION/bin \
+    $DDD_DIB_REPOLOCATION/bin/disk-image-create $*

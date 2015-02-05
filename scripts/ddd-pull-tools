@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -eux
+set -o pipefail
+
+source $(which ddd-env-vars)
+
+cd $DDD_WORKDIR
+
+if ! [ -d $DDD_DIB_REPOLOCATION/.git ]; then
+    git clone git://git.openstack.org/openstack/diskimage-builder $DDD_DIB_REPOLOCATION
+else
+    pushd $DDD_DIB_REPOLOCATION
+
+    if echo "/$(git symbolic-ref -q HEAD)" | grep -q "/master\$" ; then
+        git pull --ff-only
+    fi
+    popd
+fi
+
+if ! [ -d $DDD_DIB_UTILS_REPOLOCATION/.git ]; then
+    git clone git://git.openstack.org/openstack/dib-utils $DDD_DIB_UTILS_REPOLOCATION
+else
+    pushd $DDD_DIB_UTILS_REPOLOCATION
+
+    if echo "/$(git symbolic-ref -q HEAD)" | grep -q "/master\$" ; then
+        git pull --ff-only
+    fi
+    popd
+fi
