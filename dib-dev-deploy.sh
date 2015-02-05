@@ -17,4 +17,4 @@ ddd-pull-tools
 
 ddd-create-image -a amd64 -o $DDD_VM_IMAGES_DIR/$name.qcow2 $*
 
-ddd-define-vm $name1 $name
+ddd-define-vm "$name-$(uuidgen)" $name
