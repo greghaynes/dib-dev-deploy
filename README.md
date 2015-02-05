@@ -1,4 +1,4 @@
-dib-deb-deploy
+dib-dev-deploy
 ==============
 
 Some helper scripts for using diskimage-builder as part of a development
