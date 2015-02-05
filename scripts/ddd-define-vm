@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eux
+set -o pipefail
+
+source $(which ddd-env-vars)
+
+vm_name=$1
+imagename=$2
+definition_path=$DDD_VM_DEFINITIONS_DIR/$vm_name.xml
+
+mkdir -p $DDD_VM_DEFINITIONS_DIR
+
+mush_exec=$DDD_MUSH_REPOLOCATION/mush.sh
+
+cat $DDD_VM_TEMPLATE | \
+    engine="kvm" \
+    name="$vm_name" \
+    memory="$DDD_VM_MEMORY" \
+    cpus="$DDD_VM_CPUS" \
+    imagefile="$DDD_VM_IMAGES_DIR/$imagename.qcow2" \
+    $mush_exec | tee $definition_path
+
+virsh define $definition_path
