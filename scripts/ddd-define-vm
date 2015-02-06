@@ -7,7 +7,7 @@ source $(which ddd-env-vars)
 
 vm_name=$1
 imagename=$2
-definition_path=$DDD_VM_DEFINITIONS_DIR/$vm_name.xml
+definition_path=$(mktemp)
 
 mkdir -p $DDD_VM_DEFINITIONS_DIR
 
@@ -22,3 +22,4 @@ cat $DDD_VM_TEMPLATE | \
     $mush_exec | tee $definition_path
 
 virsh define $definition_path
+rm $definition_path

@@ -10,7 +10,7 @@ tools="https://git.openstack.org/openstack/diskimage-builder
 https://git.openstack.org/openstack/dib-utils
 https://github.com/jwerle/mush"
 
-mkdir -p tools_dir
+mkdir -p $tools_dir
 
 for tool in $tools; do
     tool_name=$(basename $tool)
