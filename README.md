@@ -21,4 +21,22 @@ Running
 Running dib-dev-deploy is then as simple as:
 
     cd $DDD_WORKDIR/tools/dib-dev-deploy
-    ./dib-dev-deploy ubuntu enable-serial-console
+    ./dib-dev-deploy ubuntu enable-serial-console [other elements...]
+
+
+Configuration
+-------------
+
+One patter that has emerged with using DIB is to create an RC file you can
+source which exports variables needed to configure your bulids.
+
+Here is an example dddrc:
+
+    # Requires the apt-sources element
+    export DIB_APT_SOURCES=/etc/apt/sources.list
+
+    # Requires the pypi element
+    export PYPI_MIRROR_URL=http://pypi-mirror/Ubuntu-14.04/
+
+    # Directories of custom elements
+    export DDD_ELEMENTS_PATH=/home/my-user/dib-elements
