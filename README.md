@@ -23,6 +23,11 @@ Running dib-dev-deploy is then as simple as:
     cd $DDD_WORKDIR/tools/dib-dev-deploy
     ./dib-dev-deploy ubuntu enable-serial-console [other elements...]
 
+Or if you already have a qcow2 you want to boot:
+
+    ./scripts/pull-tools # only needed the first time
+    ./scripts/ddd-define-vm my-vm /my/vm.qcow2
+
 
 Configuration
 -------------
