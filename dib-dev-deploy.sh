@@ -9,11 +9,6 @@ fi
 
 source $(which ddd-env-vars)
 
-ddd_src_dir=$DDD_WORKDIR/tools/dib-dev-deploy
-if ! [ -d $ddd_src_dir -o -L $ddd_src_dir ]; then
-    ln -s $(dirname $(which ddd-env-vars))/../ $DDD_WORKDIR/tools/dib-dev-deploy
-fi
-
 mkdir -p $DDD_WORKDIR
 
 if ! [ -f "$DDD_VM_TEMPLATE" ]; then
@@ -24,6 +19,11 @@ fi
 name="test"
 
 ddd-pull-tools
+
+ddd_src_dir=$DDD_WORKDIR/tools/dib-dev-deploy
+if ! [ -d $ddd_src_dir -o -L $ddd_src_dir ]; then
+    ln -s $(dirname $(which ddd-env-vars))/../ $DDD_WORKDIR/tools/dib-dev-deploy
+fi
 
 ddd-create-image -a amd64 -o $DDD_VM_IMAGES_DIR/$name.qcow2 $*
 
