@@ -2,7 +2,17 @@
 set -eux
 set -o pipefail
 
+if [ -z "$(which ddd-env-vars)" ]; then
+    echo "Please put dib-dev-deploy/scripts into your PATH."
+    exit 1
+fi
+
 source $(which ddd-env-vars)
+
+ddd_src_dir=$DDD_WORKDIR/tools/dib-dev-deploy
+if ! [ -d $ddd_src_dir -o -L $ddd_src_dir ]; then
+    ln -s $(dirname $(which ddd-env-vars))/../ $DDD_WORKDIR/tools/dib-dev-deploy
+fi
 
 mkdir -p $DDD_WORKDIR
 
