@@ -27,4 +27,4 @@ fi
 
 ddd-create-image -a amd64 -o $DDD_VM_IMAGES_DIR/$name.qcow2 $*
 
-ddd-define-vm "$name-$(uuidgen)" $name
+ddd-define-vm "$name-$(uuidgen)" $DDD_VM_IMAGES_DIR/$name.qcow2

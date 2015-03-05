@@ -6,7 +6,7 @@ set -o pipefail
 source $(which ddd-env-vars)
 
 vm_name=$1
-imagename=$2
+image_path=$2
 definition_path=$(mktemp)
 
 mkdir -p $DDD_VM_DEFINITIONS_DIR
@@ -18,7 +18,7 @@ cat $DDD_VM_TEMPLATE | \
     name="$vm_name" \
     memory="$DDD_VM_MEMORY" \
     cpus="$DDD_VM_CPUS" \
-    imagefile="$DDD_VM_IMAGES_DIR/$imagename.qcow2" \
+    imagefile="$image_path" \
     $mush_exec | tee $definition_path
 
 virsh define $definition_path
