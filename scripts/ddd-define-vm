@@ -18,6 +18,7 @@ cat $DDD_VM_TEMPLATE | \
     name="$vm_name" \
     memory="$DDD_VM_MEMORY" \
     cpus="$DDD_VM_CPUS" \
+    emulator="$DDD_EMULATOR" \
     imagefile="$image_path" \
     $mush_exec | tee $definition_path
 
