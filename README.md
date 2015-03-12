@@ -10,7 +10,7 @@ Setup
 
 To get dib-dev-deploy perform the following:
 
-    git clone https://github.com/greghaynes/dib-elements ddd-workdir/tools/dib-dev-deploy
+    git clone https://github.com/greghaynes/dib-dev-deploy ddd-workdir/tools/dib-dev-deploy
     export DDD_WORKDIR="$(pwd)/ddd-workdir"
     export PATH=$PATH:$DDD_WORKDIR/tools/dib-dev-deploy/scripts
 
@@ -25,14 +25,14 @@ Running dib-dev-deploy is then as simple as:
 
 Or if you already have a qcow2 you want to boot:
 
-    ./scripts/pull-tools # only needed the first time
+    ./scripts/ddd-pull-tools # only needed the first time
     ./scripts/ddd-define-vm my-vm /my/vm.qcow2
 
 
 Configuration
 -------------
 
-One patter that has emerged with using DIB is to create an RC file you can
+One pattern that has emerged with using DIB is to create an RC file you can
 source which exports variables needed to configure your bulids.
 
 Here is an example dddrc:
