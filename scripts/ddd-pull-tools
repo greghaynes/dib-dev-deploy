@@ -3,7 +3,7 @@
 set -eux
 set -o pipefail
 
-source $(which ddd-env-vars)
+source $(dirname $0)/ddd-env-vars
 
 tools_dir=$DDD_WORKDIR/tools
 tools="https://git.openstack.org/openstack/diskimage-builder

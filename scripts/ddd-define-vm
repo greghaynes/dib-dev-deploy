@@ -1,15 +1,31 @@
 #!/bin/bash
 
-set -eux
+set -eu
 set -o pipefail
 
-source $(which ddd-env-vars)
+source $(dirname $0)/ddd-env-vars
+
+function usage() {
+    echo "usage: $0 vm_name image_path"
+}
+
+
+if [ -z "${1:-}" -o -z "${2:-}" ]; then
+    echo "Error: Missing arguments."
+    usage
+    exit 1
+fi
 
 vm_name=$1
 image_path=$2
-definition_path=$(mktemp)
+if ! [ -f "$image_path" ]; then
+    echo "Error: Could not find file at specified image_path '$image_path'"
+    usage
+    exit 1
+fi
+image_path=$(readlink -e $image_path)
 
-mkdir -p $DDD_VM_DEFINITIONS_DIR
+definition_path=$(mktemp)
 
 mush_exec=$DDD_MUSH_REPOLOCATION/mush.sh
 
@@ -20,6 +36,8 @@ cat $DDD_VM_TEMPLATE | \
     cpus="$DDD_VM_CPUS" \
     emulator="$DDD_EMULATOR" \
     imagefile="$image_path" \
+    interface_1_type="bridge" \
+    interface_1_source_interface="$DDD_INTERFACE_1_SOURCE_INTERFACE" \
     $mush_exec | tee $definition_path
 
 virsh define $definition_path

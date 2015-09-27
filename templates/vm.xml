@@ -36,8 +36,8 @@
     <memballoon model='virtio'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
     </memballoon>
-    <interface type='network'>
-      <source network='default'/>
+    <interface type='{{interface_1_type}}'>
+{{#interface_1_source_interface}}<source bridge='{{interface_1_source_interface}}'/>{{/interface_1_source_interface}}
       <model type='virtio'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
     </interface>
